@@ -25,15 +25,12 @@
 
                 <androidx.appcompat.widget.AppCompatImageView
                     android:id="@+id/imgDetails"
-                    android:layout_width="200dp"
-                    android:layout_height="200dp"
+                    android:layout_width="400dp"
+                    android:layout_height="300dp"
                     android:layout_gravity="center"
+                    android:scaleType="fitXY"
                     android:layout_marginTop="12dp"
-                    android:scaleType="centerInside"
-                    android:src="@drawable/ic_launcher_background"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    android:src="@drawable/ic_launcher_background"/>
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -210,7 +207,6 @@
                     android:isIndicator="true"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/txtAffectionL" />
-
             </LinearLayout>
         </ScrollView>
 

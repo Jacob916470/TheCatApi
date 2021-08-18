@@ -9,10 +9,10 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
 import com.jacob.thecatapi.R
-import com.jacob.thecatapi.data.network.models.TheCatApiResponseItem
+import com.jacob.thecatapi.data.network.repositories.TheCatApiNetworkRepository
 import com.jacob.thecatapi.databinding.FragmentCatDetailsBinding
+import com.jacob.thecatapi.domain.useCases.GetCatApiUseCase
 import com.jacob.thecatapi.presentation.catDetails.viewModel.CatDetailsViewModel
-import retrofit2.Response
 
 class CatDetailsFragment : Fragment() {
 
@@ -67,6 +67,7 @@ class CatDetailsFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
         fragmentCatDetailsBinding?.imgDetails?.let {
             Glide
                 .with(this)

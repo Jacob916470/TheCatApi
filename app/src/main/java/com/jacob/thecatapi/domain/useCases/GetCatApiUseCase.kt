@@ -14,5 +14,4 @@ class GetCatApiUseCase(
             apykey = apikey
         )
     }
-
 }

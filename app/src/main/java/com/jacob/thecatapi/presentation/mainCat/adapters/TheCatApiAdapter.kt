@@ -1,24 +1,17 @@
 package com.jacob.thecatapi.presentation.mainCat.adapters
 
-import android.content.Context
-import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.RatingBar
 import android.widget.TextView
 import androidx.appcompat.widget.AppCompatImageView
-import androidx.appcompat.widget.AppCompatRatingBar
 import androidx.cardview.widget.CardView
-import androidx.constraintlayout.widget.ConstraintLayout
-import androidx.core.net.toUri
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.jacob.thecatapi.R
 import com.jacob.thecatapi.data.network.models.TheCatApiResponseItem
-import com.jacob.thecatapi.data.utils.Configurations
 import com.jacob.thecatapi.presentation.core.callBack.OnItemClickListener
-import com.jacob.thecatapi.presentation.mainCat.view.MainCatFragment
 import com.jacob.thecatapi.presentation.visorImg.view.VisorImgFragment
 
 class TheCatApiAdapter(
@@ -36,8 +29,8 @@ class TheCatApiAdapter(
         Glide
             .with(holder.view.context)
             .load(cat.image?.url)
-            .into(holder.imagev)
-        holder.name.text = "Cat name: ${cat.name}"
+            .into(holder.imagev).view.setOnClickListener { VisorImgFragment() }
+        holder.name.text = "Catname: ${cat.name}"
         holder.origin.text = "Origin: ${cat.origin}"
         holder.ratingB?.rating = cat.affection_level.toFloat()
         holder.container.setOnClickListener {
