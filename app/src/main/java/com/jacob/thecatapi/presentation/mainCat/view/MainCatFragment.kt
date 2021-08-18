@@ -16,11 +16,13 @@ import com.jacob.thecatapi.data.network.repositories.TheCatApiNetworkRepository
 import com.jacob.thecatapi.databinding.FragmentMainCatBinding
 import com.jacob.thecatapi.domain.useCases.GetCatApiUseCase
 import com.jacob.thecatapi.presentation.core.callBack.OnItemClickListener
+import com.jacob.thecatapi.presentation.core.callBack.ResultCallBack
 import com.jacob.thecatapi.presentation.mainCat.adapters.TheCatApiAdapter
 import com.jacob.thecatapi.presentation.mainCat.viewModel.MainCatViewModel
 import com.jacob.thecatapi.presentation.mainCat.viewModel.MainCatViewModelFactory
+import com.jacob.thecatapi.presentation.visorImg.view.VisorImgFragment
 
-class MainCatFragment : Fragment(), OnItemClickListener<TheCatApiResponseItem> {
+class MainCatFragment : Fragment(), OnItemClickListener<TheCatApiResponseItem> ,ResultCallBack<TheCatApiResponseItem>{
 
     private var fragmentMainCatBinding: FragmentMainCatBinding? = null
 
@@ -48,8 +50,8 @@ class MainCatFragment : Fragment(), OnItemClickListener<TheCatApiResponseItem> {
                 this,
                 MainCatViewModelFactory(
                     GetCatApiUseCase(
-                        TheCatApiNetworkRepository()
-                    )
+                        TheCatApiNetworkRepository()),
+                    resultCallBack = this
                 )
             ).get(MainCatViewModel::class.java)
 
@@ -63,7 +65,7 @@ class MainCatFragment : Fragment(), OnItemClickListener<TheCatApiResponseItem> {
                 if (catsApi.isNotEmpty()) {
                     fragmentMainCatBinding?.recyclerMain?.apply {
                         layoutManager = LinearLayoutManager(context)
-                        adapter = TheCatApiAdapter(catsApi, this@MainCatFragment)
+                        adapter = TheCatApiAdapter(catsApi, this@MainCatFragment,this@MainCatFragment)
                     }
                 }
             }
@@ -85,5 +87,15 @@ class MainCatFragment : Fragment(), OnItemClickListener<TheCatApiResponseItem> {
             "energyLevel" to item.energy_level,
         )
         findNavController().navigate(R.id.action_mainCatFragment_to_catDetailsFragment, bundle)
+
+    }
+
+    override fun onSuccess(item: TheCatApiResponseItem) {
+        val bundle = bundleOf("image" to item.image?.url)
+        findNavController().navigate(R.id.action_mainCatFragment_to_visorImgFragment,bundle)
+    }
+
+    override fun onError(message: String, type: TheCatApiResponseItem?) {
+
     }
 }

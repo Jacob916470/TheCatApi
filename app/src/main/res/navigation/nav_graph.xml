@@ -13,10 +13,17 @@
         <action
             android:id="@+id/action_mainCatFragment_to_catDetailsFragment"
             app:destination="@id/catDetailsFragment" />
+        <action
+            android:id="@+id/action_mainCatFragment_to_visorImgFragment"
+            app:destination="@id/visorImgFragment" />
     </fragment>
     <fragment
         android:id="@+id/catDetailsFragment"
         android:name="com.jacob.thecatapi.presentation.catDetails.view.CatDetailsFragment"
         android:label="CatDetailsFragment"
         tools:layout="@layout/fragment_cat_details"/>
+    <fragment
+        android:id="@+id/visorImgFragment"
+        android:name="com.jacob.thecatapi.presentation.visorImg.view.VisorImgFragment"
+        android:label="VisorImgFragment" />
 </navigation>

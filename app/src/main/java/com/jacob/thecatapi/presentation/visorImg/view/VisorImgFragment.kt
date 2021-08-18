@@ -46,6 +46,12 @@ class VisorImgFragment: Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
+        fragmentVisorBiding?.ivVisor?.let {
+            Glide
+                .with(this)
+                .load(imagen)
+                .centerCrop()
+                .into(it)
+        }
     }
 }
