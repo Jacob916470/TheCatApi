@@ -10,10 +10,9 @@ import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.jacob.thecatapi.R
-import com.jacob.thecatapi.data.network.models.TheCatApiResponseItem
+import com.jacob.thecatapi.data.network.models.breeds.TheCatApiResponseItem
 import com.jacob.thecatapi.presentation.core.callBack.OnItemClickListener
 import com.jacob.thecatapi.presentation.core.callBack.ResultCallBack
-import java.util.concurrent.TimeoutException
 
 
 class TheCatApiAdapter(

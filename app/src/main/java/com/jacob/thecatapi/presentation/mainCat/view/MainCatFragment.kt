@@ -10,8 +10,10 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.bumptech.glide.Glide
 import com.jacob.thecatapi.R
-import com.jacob.thecatapi.data.network.models.TheCatApiResponseItem
+import com.jacob.thecatapi.data.network.models.breeds.TheCatApiResponseItem
+import com.jacob.thecatapi.data.network.models.images.CatImagesResponseItem
 import com.jacob.thecatapi.data.network.repositories.TheCatApiNetworkRepository
 import com.jacob.thecatapi.databinding.FragmentMainCatBinding
 import com.jacob.thecatapi.domain.useCases.GetCatApiUseCase
@@ -20,9 +22,8 @@ import com.jacob.thecatapi.presentation.core.callBack.ResultCallBack
 import com.jacob.thecatapi.presentation.mainCat.adapters.TheCatApiAdapter
 import com.jacob.thecatapi.presentation.mainCat.viewModel.MainCatViewModel
 import com.jacob.thecatapi.presentation.mainCat.viewModel.MainCatViewModelFactory
-import com.jacob.thecatapi.presentation.visorImg.view.VisorImgFragment
 
-class MainCatFragment : Fragment(), OnItemClickListener<TheCatApiResponseItem> ,ResultCallBack<TheCatApiResponseItem>{
+class MainCatFragment : Fragment(), OnItemClickListener<TheCatApiResponseItem>, ResultCallBack<TheCatApiResponseItem>{
 
     private var fragmentMainCatBinding: FragmentMainCatBinding? = null
 
@@ -84,9 +85,9 @@ class MainCatFragment : Fragment(), OnItemClickListener<TheCatApiResponseItem> ,
             "adaptability" to item.adaptability,
             "childFriendly" to item.child_friendly,
             "dogFriendly" to item.dog_friendly,
-            "energyLevel" to item.energy_level,
+            "energyLevel" to item.energy_level
         )
-        findNavController().navigate(R.id.action_mainCatFragment_to_catDetailsFragment, bundle)
+       findNavController().navigate(R.id.action_mainCatFragment_to_catDetailsFragment, bundle)
 
     }
 

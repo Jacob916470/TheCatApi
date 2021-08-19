@@ -1,7 +1,8 @@
 package com.jacob.thecatapi.data.network.repositories
 
 import com.jacob.thecatapi.data.network.NetworkModule
-import com.jacob.thecatapi.data.network.models.TheCatApiResponse
+import com.jacob.thecatapi.data.network.models.breeds.TheCatApiResponse
+import com.jacob.thecatapi.data.network.models.images.CatImagesResponse
 import com.jacob.thecatapi.data.network.services.TheCatApiService
 import com.jacob.thecatapi.data.utils.Configurations
 import com.jacob.thecatapi.domain.repositories.GetApiRepository
@@ -20,6 +21,17 @@ class TheCatApiNetworkRepository: GetApiRepository {
             service = TheCatApiService::class.java
         ).getApiCat(
             apikey = apykey
+        )
+    }
+
+    override suspend fun getCatImagesRepository(
+        apikey: String
+    ): Response<CatImagesResponse> {
+        return NetworkModule().provideApi(
+            retrofit = retrofitInstance,
+            service = TheCatApiService::class.java
+        ).getCatImages(
+            apikey = apikey
         )
     }
 }

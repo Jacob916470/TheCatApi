@@ -1,4 +1,4 @@
-package com.jacob.thecatapi.data.network.models
+package com.jacob.thecatapi.data.network.models.breeds
 
 data class Image(
     val height: Int,

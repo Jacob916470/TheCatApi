@@ -1,8 +1,8 @@
 package com.jacob.thecatapi.presentation.mainCat.viewModel
 
 import androidx.lifecycle.MutableLiveData
-import com.jacob.thecatapi.data.network.models.TheCatApiResponse
-import com.jacob.thecatapi.data.network.models.TheCatApiResponseItem
+import com.jacob.thecatapi.data.network.models.breeds.TheCatApiResponse
+import com.jacob.thecatapi.data.network.models.breeds.TheCatApiResponseItem
 import com.jacob.thecatapi.data.utils.Configurations
 import com.jacob.thecatapi.domain.useCases.GetCatApiUseCase
 import com.jacob.thecatapi.presentation.core.base.BaseViewModel

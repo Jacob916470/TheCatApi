@@ -7,12 +7,16 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import com.jacob.thecatapi.R
 import com.jacob.thecatapi.data.network.repositories.TheCatApiNetworkRepository
 import com.jacob.thecatapi.databinding.FragmentCatDetailsBinding
 import com.jacob.thecatapi.domain.useCases.GetCatApiUseCase
+import com.jacob.thecatapi.presentation.catDetails.adapters.CatImagesAdapter
 import com.jacob.thecatapi.presentation.catDetails.viewModel.CatDetailsViewModel
+import com.jacob.thecatapi.presentation.catDetails.viewModel.CatDetailsViewModelFactory
+
 
 class CatDetailsFragment : Fragment() {
 
@@ -28,6 +32,7 @@ class CatDetailsFragment : Fragment() {
     var childFriendly: Int = 0
     var dogFriendly: Int = 0
     var energyLevel: Int = 0
+    var images: String? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -43,6 +48,7 @@ class CatDetailsFragment : Fragment() {
             childFriendly = it.getInt("childFriendly")
             dogFriendly = it.getInt("dogFriendly")
             energyLevel = it.getInt("energyLevel")
+            images = it.getString("images")
         }
     }
 
@@ -59,7 +65,12 @@ class CatDetailsFragment : Fragment() {
         )
         fragmentCatDetailsBinding?.catDetailsViewModel =
             ViewModelProvider(
-                this
+                this,
+                CatDetailsViewModelFactory(
+                    GetCatApiUseCase(
+                        TheCatApiNetworkRepository()
+                    )
+                )
             ).get(CatDetailsViewModel::class.java)
 
         return fragmentCatDetailsBinding?.root
@@ -68,6 +79,24 @@ class CatDetailsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        fragmentCatDetailsBinding?.catDetailsViewModel?.catImagesResponseMDL?.observe(
+            viewLifecycleOwner, { catsApi ->
+                if (catsApi.isNotEmpty()) {
+                    fragmentCatDetailsBinding?.re?.apply {
+                        layoutManager = LinearLayoutManager(context)
+                        adapter = CatImagesAdapter(
+                            catsApi,
+                            this@CatDetailsFragment
+                        )
+                    }
+                }
+            }
+        )
+
+        getData()
+    }
+
+    private fun getData() {
         fragmentCatDetailsBinding?.imgDetails?.let {
             Glide
                 .with(this)
